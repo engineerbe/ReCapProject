@@ -21,5 +21,15 @@ namespace Business.Concrete
             //iş kodları
             return _CarDal.GetAll();
         }
-    }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _CarDal.GetAll(p => p.ColorId == id);
+        }
+
+        public List<Car> GetsCarByBrandId(int id)
+        {
+            return _CarDal.GetAll(p => p.BrandId == id);
+        }
+    } 
 }
