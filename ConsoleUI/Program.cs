@@ -27,17 +27,34 @@ namespace ConsoleUI
             //brandManager.Delete(new Brand { BrandId = 4 });
 
             CarManager carManager = new CarManager(new EfCarDal());
-            
+            //carManager.Add(new Car { CarId = 1, CarName = "A180", BrandId = 2, ColorId = 1, DailyPrice = 200, ModelYear = 2012 });
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            //userManager.Add(new User { UserId = 1, FirstName = "Kemal", LastName = "Unlu", Email = "kemal@123.com", Pasword = 12345 });
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //customerManager.Add(new Customer { UserId = 1, CompanyName = "Unlu Holding", CustomerId = 1 });
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //rentalManager.Add(new Rental { CarId = 1, CustomerId = 1, RentalId = 1, RentDate = DateTime.Now, });
 
         }
 
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName);
+                }
+
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
     }
 }

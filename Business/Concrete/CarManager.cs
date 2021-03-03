@@ -12,11 +12,11 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _CarDal;
+        ICarDal _carDal;
 
         public CarManager(ICarDal carDal)
         {
-            _CarDal = carDal;
+            _carDal = carDal;
         }
 
         public IResult Add(Car car)
@@ -25,41 +25,41 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CarNameInValid);
             }
-            _CarDal.Add(car);
+            _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
         {
-            _CarDal.Delete(car);
+            _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
         public IDataResult<List<Car>> GetAll()
         {
             //iş kodları
-            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
         }
 
      
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return  new SuccessDataResult<List<CarDetailDto>>(_CarDal.GetCarDetails());
+            return  new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int carId)
         {
-            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(p => p.BrandId == id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == carId));
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int carId)
         {
-            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(p => p.ColorId == id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == carId));
         }
 
         public IResult Update(Car car)
         {
-            _CarDal.Update(car);
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
     } 
